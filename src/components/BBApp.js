@@ -18,29 +18,29 @@ const BBApp = () => {
   //ASYNC AWAIT
 
   const updateQuote = async () => {
-   try {
-    setIsLoading(true);
-    const ENDPOINT = "https://api.breakingbadquotes.xyz/v1/quotes";
-    const response = await axios.get(ENDPOINT);
-    const [newQuote] = await response.data;
-    const { quote: text, author } = newQuote;
+    try {
+      setIsLoading(true);
+      const ENDPOINT = "https://api.breakingbadquotes.xyz/v1/quotes";
+      const response = await axios.get(ENDPOINT);
+      const [newQuote] = await response.data;
+      const { quote: text, author } = newQuote;
 
-    //Objetos literales
-    setQuote({
-      text,
-      author,
-    });
-   } catch (error) {
-    console.error("Error al Obtener la cita:", error);
-    setQuote({
-      text: "No se puede obtener la cita. La API está caída",
-      author: "Error",
-    });
-   } finally {
-    setTimeout(() => {
-      setIsLoading(false);
-    }, 1500);
-   }  
+      //Objetos literales
+      setQuote({
+        text,
+        author,
+      });
+    } catch (error) {
+      console.error("Error al Obtener la cita:", error);
+      setQuote({
+        text: "No se puede obtener la cita. La API está caída",
+        author: "Error",
+      });
+    } finally {
+      setTimeout(() => {
+        setIsLoading(false);
+      }, 1500);
+    }
   };
 
   useEffect(() => {
