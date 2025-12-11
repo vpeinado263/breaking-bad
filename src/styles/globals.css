@@ -1,11 +1,8 @@
-
 body {
-    padding: auto;
-    margin: auto;
-    text-align: center;
-    background-image: url('https://www.dafont.com/forum/attach/orig/1/4/149303.jpg');
-    background-repeat: no-repeat;
-    background-size: cover;
-    
+  padding: auto;
+  margin: auto;
+  text-align: center;
+  background-image: url("https://www.dafont.com/forum/attach/orig/1/4/149303.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
 }
-
