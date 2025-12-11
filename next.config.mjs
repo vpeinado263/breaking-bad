@@ -3,7 +3,16 @@ const nextConfig = {
   reactStrictMode: true,
 
   images: {
-    domains: ['www.dafont.com', 'upload.wikimedia.org'],  
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "www.dafont.com",
+      },
+      {
+        protocol: "https",
+        hostname: "upload.wikimedia.org",
+      }
+    ],
   },
 };
 
