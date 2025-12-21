@@ -1,5 +1,5 @@
+"use client";
 import { useState, useEffect } from "react";
-import axios from "axios";
 import Quote from "./Quote";
 import Loader from "./Loader";
 import styles from "@/styles/BBApp.module.css";
@@ -15,31 +15,30 @@ const BBApp = () => {
 
   const [isLoading, setIsLoading] = useState(false);
 
-  //ASYNC AWAIT
-
   const updateQuote = async () => {
     try {
       setIsLoading(true);
-      const ENDPOINT = "https://api.breakingbadquotes.xyz/v1/quotes";
-      const response = await axios.get(ENDPOINT);
-      const [newQuote] = await response.data;
+  
+      const res = await fetch(
+        "https://api.breakingbadquotes.xyz/v1/quotes",
+        { cache: "no-store" }
+      );
+  
+      if (!res.ok) throw new Error("Error de red");
+  
+      const [newQuote] = await res.json();
       const { quote: text, author } = newQuote;
-
-      //Objetos literales
-      setQuote({
-        text,
-        author,
-      });
+  
+      setQuote({ text, author });
+  
     } catch (error) {
-      console.error("Error al Obtener la cita:", error);
+      console.error("Error al obtener la cita:", error);
       setQuote({
         text: "No se puede obtener la cita. La API está caída",
         author: "Error",
       });
     } finally {
-      setTimeout(() => {
-        setIsLoading(false);
-      }, 1500);
+      setTimeout(() => setIsLoading(false), 1500);
     }
   };
 
