@@ -18,19 +18,25 @@ const BBApp = () => {
   const updateQuote = async () => {
     try {
       setIsLoading(true);
-  
-      const res = await fetch(
-        "https://api.breakingbadquotes.xyz/v1/quotes",
-        { cache: "no-store" }
-      );
-  
-      if (!res.ok) throw new Error("Error de red");
-  
-      const [newQuote] = await res.json();
-      const { quote: text, author } = newQuote;
-  
-      setQuote({ text, author });
-  
+
+      const res = await fetch("/api/quotes");
+
+      const data = await res.json();
+
+      if (!res.ok) {
+        setQuote({
+          text: "La API de Breaking Bad no está disponible en este momento.",
+          author: "Sistema",
+        });
+        return;
+      }
+
+      const [newQuote] = data;
+
+      setQuote({
+        text: newQuote.quote,
+        author: newQuote.author,
+      });
     } catch (error) {
       console.error("Error al obtener la cita:", error);
       setQuote({
